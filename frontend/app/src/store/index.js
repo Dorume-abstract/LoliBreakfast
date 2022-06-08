@@ -22,6 +22,7 @@ export default createStore({
         method: "GET"
       }).then((food)=> {
         commit('setFoodItems', food.data);
+        return food.data;
       }).catch((err)=> {
         console.warn(err)
       })
