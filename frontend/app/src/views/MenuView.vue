@@ -722,8 +722,15 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 export default {
-  name: "MenuView"
+  name: "MenuView",
+  methods: {
+    ...mapActions(['getFoodItemsFromApi'])
+  },
+  mounted() {
+    this.getFoodItemsFromApi()
+  }
 }
 </script>
 
