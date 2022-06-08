@@ -18,7 +18,7 @@ export default createStore({
   },
   actions: {
     getFoodItemsFromApi({ commit }) {
-      return axios.get('http//localhost:8000/api/food/', {
+      return axios.get('http://127.0.0.1:8000/api/food/', {
         method: "GET"
       }).then((food)=> {
         commit('setFoodItems', food.data);

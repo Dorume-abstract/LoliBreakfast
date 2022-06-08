@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +14,12 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+#region Food
+Route::get('food', [FoodController::class, 'index']);
+Route::get('food/{id}', [FoodController::class, 'show']);
+Route::post('food',[FoodController::class, 'store']);
+Route::put('food/{id}', [FoodController::class, 'update']);
+Route::delete('food/{id}', [FoodController::class, 'delete']);
+#endregion
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+#region 
