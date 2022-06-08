@@ -1103,8 +1103,21 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
-  name: "HomeView"
+  name: "HomeView",
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    ...mapActions(['getFoodItemsFromApi'])
+  },
+  mounted() {
+    this.getFoodItemsFromApi()
+  }
 }
 </script>
 

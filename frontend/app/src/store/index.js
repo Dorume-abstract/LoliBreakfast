@@ -17,11 +17,11 @@ export default createStore({
     }
   },
   actions: {
-    getFoodItemsFromApi({commit}) {
+    getFoodItemsFromApi({ commit }) {
       return axios.get('http//localhost:8000/api/food/', {
         method: "GET"
-      }).then((foods)=> {
-        commit('setFoodItems', foods);
+      }).then((food)=> {
+        commit('setFoodItems', food.data);
       }).catch((err)=> {
         console.warn(err)
       })
