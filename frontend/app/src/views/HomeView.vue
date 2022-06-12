@@ -245,23 +245,17 @@
         </h2>
       </div>
 
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
-      </ul>
+      <food-type-component/>
 
       <div class="filters-content">
-        <div class="row grid" v-for="item in foodItems" :key="item.id">
-          <food-item-component :id="item.id" :name="item.name" :desc="item.desc" :price="item.price" :is-available="item.isAvailable" :type-name="item.typeName" :discount="item.discount"></food-item-component>
+        <div class="row grid">
+          <food-item-component v-for="item in foodItems.slice(0, 39)" :key="item.id" :item="item"></food-item-component>
         </div>
       </div>
       <div class="btn-box">
-        <a href="">
+        <router-link to="/menu">
           View More
-        </a>
+        </router-link>
       </div>
     </div>
   </section>
@@ -292,9 +286,9 @@
               are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
               the middle of text. All
             </p>
-            <a href="">
+            <router-link to="/about">
               Read More
-            </a>
+            </router-link>
           </div>
         </div>
       </div>
@@ -355,9 +349,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="map_container ">
-            <div id="googleMap"></div>
-          </div>
+          <map-component/>
         </div>
       </div>
     </div>
@@ -422,20 +414,29 @@
 <script>
 import {mapActions} from "vuex";
 import FoodItemComponent from "@/components/FoodItemComponent";
+import FoodTypeComponent from "@/components/FoodTypeComponent";
+import MapComponent from "@/components/MapComponent";
 
 export default {
   name: "HomeView",
-  components: {FoodItemComponent},
+  components: {FoodTypeComponent, FoodItemComponent, MapComponent},
   data() {
     return {
-      foodItems: []
+      foodItems: [],
+      foodTypes: []
     }
   },
   methods: {
-    ...mapActions(['getFoodItemsFromApi'])
+    ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi'])
   },
   mounted() {
-    this.foodItems = this.getFoodItemsFromApi()
+    Promise.all([
+        this.getFoodItemsFromApi(),
+        this.getFoodTypesFromApi()
+    ]).then((data)=>{
+      this.foodItems = data[0];
+      this.foodTypes = data[1];
+    })
   }
 }
 </script>

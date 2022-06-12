@@ -3,7 +3,7 @@
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <router-link class="navbar-brand" to="/">
-            <span>
+            <span @click="activeFirst">
               Feane
             </span>
           </router-link>
@@ -15,16 +15,16 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  mx-auto ">
               <li class="nav-item active">
-                <router-link class="nav-link" to="/">Home <span class="sr-only">(current)</span></router-link>
+                <router-link class="nav-link" @click="setActive" to="/">Home</router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/menu">Menu</router-link>
+                <router-link class="nav-link" @click="setActive" to="/menu">Menu</router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/about">About</router-link>
+                <router-link class="nav-link" @click="setActive" to="/about">About</router-link>
               </li>
               <li class="nav-item">
-                <router-link class="nav-link" to="/book-table">Book Table</router-link>
+                <router-link class="nav-link" @click="setActive" to="/book-table">Book Table</router-link>
               </li>
             </ul>
             <div class="user_option">
@@ -85,11 +85,10 @@
                   </g>
                 </svg>
               </a>
-              <form class="form-inline">
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                  <i class="fa fa-search" aria-hidden="true"></i>
+                <button @click="" class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                    <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
-              </form>
+              <input class="fa my-input" type="text" placeholder="Search.." onkeyup="">
               <a href="" class="order_online">
                 Order Online
               </a>
@@ -102,7 +101,28 @@
 
 <script>
 export default {
-  name: "HeaderComponent"
+  name: "HeaderComponent",
+  data() {
+    return {
+      searchActive: false
+    }
+  },
+  methods: {
+    removeActive() {
+      Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li')).forEach(item=>{
+        item.classList.remove('active')
+      })
+    },
+    setActive(event) {
+      this.removeActive();
+      event.currentTarget.parentElement.classList.add('active');
+    },
+    activeFirst() {
+      this.removeActive();
+      Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li'))[0].classList.add('active');
+
+    }
+  }
 }
 </script>
 
@@ -111,5 +131,17 @@ export default {
   background-color: black;
   width: 100%;
   z-index: 5;
+}
+
+.my-input {
+  border-radius: 25px;
+}
+
+.my-input:focus {
+  outline: none !important;
+}
+
+.dropdown-content {
+
 }
 </style>

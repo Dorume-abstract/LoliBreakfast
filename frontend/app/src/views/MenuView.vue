@@ -12,13 +12,7 @@
         </h2>
       </div>
 
-      <ul class="filters_menu">
-        <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
-      </ul>
+      <food-type-component/>
 
       <div class="filters-content">
         <div class="row grid">
@@ -720,11 +714,13 @@
    </div>
 </div>
 </template>
-
 <script>
+import FoodTypeComponent from "@/components/FoodTypeComponent";
 import {mapActions} from 'vuex'
 export default {
   name: "MenuView",
+  components: {FoodTypeComponent},
+
   data() {
     return {
 

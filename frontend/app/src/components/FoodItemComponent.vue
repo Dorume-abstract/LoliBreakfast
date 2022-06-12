@@ -3,18 +3,24 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="images/f1.png" alt="">
+                  <img src="https://look.com.ua/pic/201511/1280x800/look.com.ua-137209.jpg" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
-                    {{name}}
+                    {{item.name}}
                   </h5>
                   <p>
-                    {{desc}}
+                    {{item.desc}}
                   </p>
                   <div class="options">
                     <h6>
-                      ${{price}}
+                      <div v-if="item.discount === 0">
+                        <span>${{item.price}}</span>
+                      </div>
+                      <div v-else class="flex">
+                        <span><s>${{item.price}}</s></span>
+                        <span class="discount">${{item.price - item.price * item.discount / 100}}</span>
+                      </div>
                     </h6>
                     <a href="">
                       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
@@ -81,17 +87,24 @@
 export default {
   name: "FoodItemComponent",
   props: [
-      'id',
-      'name',
-      'desc',
-      'price',
-      'isAvailable',
-      'discount',
-      'typeName',
+      'item'
   ]
 }
 </script>
 
 <style scoped>
+.flex {
+  display: flex;
+}
+.discount {
+  color: #de3a41;
+  padding-left: 5px;
+}
 
+.discount-percent {
+  display: block;
+  background-color: red;
+  color: white;
+  margin-left: 5px;
+}
 </style>

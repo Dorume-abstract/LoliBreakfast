@@ -51,9 +51,7 @@
           </div>
         </div>
         <div class="col-md-6">
-          <div class="map_container ">
-            <div id="googleMap"></div>
-          </div>
+          <map-component/>
         </div>
       </div>
     </div>
@@ -62,8 +60,10 @@
 </template>
 
 <script>
+import MapComponent from "@/components/MapComponent";
 export default {
-  name: "BookView"
+  name: "BookView",
+  components: {MapComponent}
 }
 </script>
 

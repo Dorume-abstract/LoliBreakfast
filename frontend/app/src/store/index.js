@@ -3,17 +3,23 @@ import axios from 'axios'
 
 export default createStore({
   state: {
-    foodItems: []
+    foodItems: [],
+    foodTypes: []
   },
   getters: {
     getFoodItems(state) {
       return state.foodItems;
+    },
+    getFoodTypes(state) {
+      return state.foodTypes;
     }
   },
   mutations: {
     setFoodItems(state, newItems) {
       state.foodItems = newItems;
-      console.log(state.foodItems);
+    },
+    setFoodTypes(state, newTypes) {
+      state.foodTypes = newTypes;
     }
   },
   actions: {
@@ -25,6 +31,16 @@ export default createStore({
         return food.data;
       }).catch((err)=> {
         console.warn(err)
+      })
+    },
+    getFoodTypesFromApi({ commit }) {
+      return axios.get('http://127.0.0.1:8000/api/type', {
+        method: "GET"
+      }).then(type=>{
+        commit('setFoodTypes', type.data);
+        return type.data;
+      }).catch((err)=> {
+        console.warn(err);
       })
     }
   },
