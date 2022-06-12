@@ -432,7 +432,7 @@ export default {
     onClickFoodType(id) {
       this.foodItems = store.state.foodItems.filter(item=>{
         console.log(this.foodItems);
-        return item.type_id = id;
+        return item.type_id === id;
       })
     }
   },
