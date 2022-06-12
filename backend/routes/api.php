@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\TypeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,4 +24,12 @@ Route::put('food/{id}', [FoodController::class, 'update']);
 Route::delete('food/{id}', [FoodController::class, 'delete']);
 #endregion
 
-#region 
+#region OrderItem 
+Route::get('type', [TypeController::class, 'index']);
+Route::get('type/{id}', [TypeController::class, 'show']);
+Route::post('type',[TypeController::class, 'store']);
+Route::put('type/{id}', [TypeController::class, 'update']);
+Route::delete('type/{id}', [TypeController::class, 'delete']);
+
+
+#endregion

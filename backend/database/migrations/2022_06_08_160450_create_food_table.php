@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('food', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('disc');
+            $table->string('imgUrl');
+            $table->string('desc');
             $table->decimal('price', $precision = 8, $scale = 2);
             $table->boolean('isAvailable');
             $table->integer('discount');
@@ -33,5 +34,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropIfExists('food');
+
     }
 };

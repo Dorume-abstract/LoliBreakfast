@@ -3,35 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Food;
+use App\Models\Type;
 
-class FoodController extends Controller
+class TypeController extends Controller
 {
     public function index() 
     {
         // If the Content-Type and Accept headers are set to 'application/json', 
         // this will return a JSON structure. This will be cleaned up later.
-        return Food::all();
+        return Type::all();
     }
      
     public function show($id) 
     {
-        return Food::find($id);
+        return Type::find($id);
     }
     
    public function store(Request $request) {
-        return Food::create($request->all);
+        return Type::create($request->all);
     }
     
     public function update(Request $request, $id) {
-        $food = Food::findOrFail($id);
-        $food->update($request->all());
+        $Type = Type::findOrFail($id);
+        $Type->update($request->all());
     
-        return $food;
+        return $Type;
     }
     
     public function delete($id) {
-        Food::find($id)->delete();
+        Type::find($id)->delete();
     
         return 204;
     }
