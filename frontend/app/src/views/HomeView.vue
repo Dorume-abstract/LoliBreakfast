@@ -413,10 +413,11 @@
 
 <script>
 import {mapActions} from "vuex";
+import { mapGetters } from 'vuex'
 import FoodItemComponent from "@/components/FoodItemComponent";
 import FoodTypeComponent from "@/components/FoodTypeComponent";
 import MapComponent from "@/components/MapComponent";
-import store from "@/store";
+
 
 export default {
   name: "HomeView",
@@ -429,9 +430,10 @@ export default {
   },
   methods: {
     ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
+    ...mapGetters(['getFoodItems']),
     onClickFoodType(id) {
-      if (id === -1) this.foodItems = store.state.foodItems;
-      this.foodItems = store.state.foodItems.filter(item=>{
+      if (id === -1) this.foodItems = this.getFoodItems();
+      this.foodItems = this.getFoodItems().filter(item=>{
         console.log(this.foodItems);
         return item.type_id === id;
       })
