@@ -85,7 +85,7 @@
                   </g>
                 </svg>
               </a>
-                <button @click="" class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
+                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </button>
               <input class="fa my-input" type="text" placeholder="Search.." onkeyup="">

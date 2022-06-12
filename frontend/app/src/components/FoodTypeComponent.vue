@@ -1,16 +1,21 @@
 <template>
 <ul class="filters_menu">
         <li class="active" data-filter="*">All</li>
-        <li data-filter=".burger">Burger</li>
-        <li data-filter=".pizza">Pizza</li>
-        <li data-filter=".pasta">Pasta</li>
-        <li data-filter=".fries">Fries</li>
+        <li v-for="item in types" :key="item.type_id" :id="item.type_id">{{item.name}}</li>
       </ul>
 </template>
 
 <script>
 export default {
-name: "FoodTypeComponent"
+  name: "FoodTypeComponent",
+  data() {
+    return {
+    }
+  },
+  props: [
+      'types'
+  ]
+
 }
 </script>
 
