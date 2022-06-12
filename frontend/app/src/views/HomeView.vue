@@ -432,10 +432,15 @@ export default {
     ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
     ...mapGetters(['getFoodItems']),
     onClickFoodType(id) {
-      if (id === -1) this.foodItems = this.getFoodItems();
-      this.foodItems = this.getFoodItems().filter(item=>{
-        return item.type_id === id;
+      if (id == -1) {
+        this.foodItems = this.getFoodItems();
+        return;      
+      }
+      
+      this.foodItems = this.getFoodItems().filter(item=>{ 
+        return item.type_id == id;
       })
+      
     }
   },
   mounted() {
