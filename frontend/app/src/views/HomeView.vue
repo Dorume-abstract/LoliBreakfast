@@ -434,7 +434,7 @@ export default {
     onClickFoodType(id) {
       if (id === -1) this.foodItems = this.getFoodItems();
       this.foodItems = this.getFoodItems().filter(item=>{
-        return item.type === id;
+        return item.type_id === id;
       })
     }
   },
