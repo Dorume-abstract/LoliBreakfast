@@ -3,7 +3,7 @@
             <div class="box">
               <div>
                 <div class="img-box">
-                  <img src="https://look.com.ua/pic/201511/1280x800/look.com.ua-137209.jpg" alt="">
+                  <img v-bind:src="item.imgUrl" alt="">
                 </div>
                 <div class="detail-box">
                   <h5>
