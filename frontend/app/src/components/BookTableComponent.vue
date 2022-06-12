@@ -42,7 +42,7 @@
                 <input required v-model="date" type="date" class="form-control">
               </div>
               <div class="btn_box">
-                <button @click="onButtonClick">
+                <button @click="buttonClick">
                   Book Now
                 </button>
               </div>
@@ -82,10 +82,11 @@ export default {
       this.peopleNumber = '';
       this.date = '';
     },
-    onButtonClick() {
-      axios.post('http://127.0.0.1:8000/table/', {
+    buttonClick() {
+      axios.post('http://127.0.0.1:8000/table/', {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date}, {
         method: "POST"
       }).then(()=>{
+        this.refresh();
         console.log('Booked');
       }).catch((err)=> {
         console.warn(err);
