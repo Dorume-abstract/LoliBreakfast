@@ -434,10 +434,9 @@ export default {
     onClickFoodType(id) {
       if (id === -1) this.foodItems = this.getFoodItems();
       this.foodItems = this.getFoodItems().filter(item=>{
-        console.log(this.foodItems);
+        console.log(item.type_id === id)
         return item.type_id === id;
       })
-      this.$forceUpdate();
     }
   },
   mounted() {
