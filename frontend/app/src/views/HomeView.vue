@@ -437,6 +437,7 @@ export default {
         console.log(this.foodItems);
         return item.type_id === id;
       })
+      this.$forceUpdate();
     }
   },
   mounted() {
