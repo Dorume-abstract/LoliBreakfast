@@ -83,9 +83,7 @@ export default {
       this.date = '';
     },
     buttonClick() {
-      axios.post('http://127.0.0.1:8000/table/', {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date}, {
-        method: "POST"
-      }).then(()=>{
+      axios.post('http://127.0.0.1:8000/table/', {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date}, ).then(()=>{
         this.refresh();
         console.log('Booked');
       }).catch((err)=> {
