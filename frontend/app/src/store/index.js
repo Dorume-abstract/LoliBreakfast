@@ -38,6 +38,7 @@ export default createStore({
         method: "GET"
       }).then(type=>{
         commit('setFoodTypes', type.data);
+        console.log(type.data);
         return type.data;
       }).catch((err)=> {
         console.warn(err);
