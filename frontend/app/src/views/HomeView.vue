@@ -245,7 +245,7 @@
         </h2>
       </div>
 
-      <food-type-component/>
+      <food-type-component @clicked="onClickFoodType" :types="foodTypes"/>
 
       <div class="filters-content">
         <div class="row grid">
@@ -416,6 +416,7 @@ import {mapActions} from "vuex";
 import FoodItemComponent from "@/components/FoodItemComponent";
 import FoodTypeComponent from "@/components/FoodTypeComponent";
 import MapComponent from "@/components/MapComponent";
+import store from "@/store";
 
 export default {
   name: "HomeView",
@@ -427,7 +428,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi'])
+    ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
+    onClickFoodType(id) {
+      this.foodItems = store.state.foodItems.filter(item=>{
+        return item.type_id = id;
+      })
+    }
   },
   mounted() {
     Promise.all([
