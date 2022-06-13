@@ -12,7 +12,7 @@
         </h2>
       </div>
 
-      <food-type-component/>
+      <food-type-component :types="foodTypes"/>
 
       <div class="filters-content">
         <div class="row grid">
