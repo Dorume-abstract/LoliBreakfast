@@ -93,9 +93,13 @@ export default {
           position: "top-center",
           timeout: 2000
         })
-
       }).catch((err)=> {
-        console.warn(err);
+        console.log(err)
+        const toast = useToast();
+        toast.error("Something went wrong", {
+          position: "top-center",
+          timeout: 2000
+        })
       })
     }
   }

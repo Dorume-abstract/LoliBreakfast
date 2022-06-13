@@ -357,7 +357,6 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
 import { mapGetters } from 'vuex'
 import FoodItemComponent from "@/components/FoodItemComponent";
 import FoodTypeComponent from "@/components/FoodTypeComponent";
@@ -374,8 +373,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
-    ...mapGetters(['getFoodItems']),
+    ...mapGetters(['getFoodItems', 'getFoodTypes']),
     onClickFoodType(id) {
       if (id == -1) {
         this.foodItems = this.getFoodItems();
@@ -389,13 +387,8 @@ export default {
     }
   },
   mounted() {
-    Promise.all([
-        this.getFoodItemsFromApi(),
-        this.getFoodTypesFromApi()
-    ]).then((data)=>{
-      this.foodItems = data[0];
-      this.foodTypes = data[1];
-    })
+    this.foodItems = this.getFoodItems;
+    this.foodTypes = this.getFoodTypes;
   }
 }
 </script>
