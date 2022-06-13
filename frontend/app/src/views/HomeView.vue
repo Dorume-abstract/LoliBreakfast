@@ -385,7 +385,6 @@ export default {
       this.foodItems = this.getFoodItems().filter(item=>{ 
         return item.type_id == id;
       })
-      
     }
   },
   mounted() {

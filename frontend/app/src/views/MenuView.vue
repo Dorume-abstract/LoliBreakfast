@@ -12,7 +12,7 @@
         </h2>
       </div>
 
-      <food-type-component :types="foodTypes"/>
+      <food-type-component @clicked="onClickFoodType" :types="foodTypes"/>
 
       <div class="filters-content">
         <div class="row grid">
@@ -43,6 +43,16 @@ export default {
   methods: {
     ...mapGetters(['getFoodItems', 'getFoodTypes']),
     ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
+    onClickFoodType(id) {
+      if (id == -1) {
+        this.foodItems = this.getFoodItems();
+        return;
+      }
+
+      this.foodItems = this.getFoodItems().filter(item=>{
+        return item.type_id == id;
+      })
+    }
   },
   mounted() {
     Promise.all([
