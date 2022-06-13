@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('desc');
             $table->decimal('price', $precision = 8, $scale = 2);
             $table->boolean('isAvailable');
-            $table->integer('discount');
+            $table->string('discount');
             $table->foreignId('type_id');
             $table->timestamps();
         });
