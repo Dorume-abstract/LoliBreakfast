@@ -60,6 +60,8 @@
 <script>
 import axios from "axios";
 import MapComponent from "@/components/MapComponent";
+import { useToast } from "vue-toastification"
+
 export default {
   name: "BookTableComponent",
   components: {
@@ -86,7 +88,12 @@ export default {
       let data = {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date};
       axios.post('http://127.0.0.1:8000/api/table/', data).then(()=>{
         this.refresh();
-        console.log('Booked');
+        const toast = useToast();
+        toast('Success');
+        toast.success("Table successfully booked", {
+          timeout: 2000
+        })
+
       }).catch((err)=> {
         console.warn(err);
       })
