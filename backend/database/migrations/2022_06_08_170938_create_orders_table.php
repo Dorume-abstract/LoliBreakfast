@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id');
+            $table->string("userName");
+            $table->string("userNumber");
             $table->string('address');
             $table->enum('status', ['Available', 'Canceled', 'Succeed']);
             $table->string('Comment');

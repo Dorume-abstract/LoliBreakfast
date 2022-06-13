@@ -89,8 +89,8 @@ export default {
       axios.post('http://127.0.0.1:8000/api/table/', data).then(()=>{
         this.refresh();
         const toast = useToast();
-        toast('Success');
         toast.success("Table successfully booked", {
+          position: "top-center",
           timeout: 2000
         })
 
