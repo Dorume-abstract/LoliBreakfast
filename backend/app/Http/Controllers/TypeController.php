@@ -20,7 +20,14 @@ class TypeController extends Controller
     }
     
    public function store(Request $request) {
-        return Type::create($request->all);
+        $type = new Type();
+        $type->name = $request->name;
+        $result = $type->save();
+        if($result){
+            return ["Biba"];
+        }else{
+            return ["Boba"];
+        }
     }
     
     public function update(Request $request, $id) {
