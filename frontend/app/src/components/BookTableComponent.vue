@@ -84,7 +84,7 @@ export default {
     },
     buttonClick() {
       let data = {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date};
-      axios.post('http://127.0.0.1:8000/table/', data).then(()=>{
+      axios.post('http://127.0.0.1:8000/api/table/', data).then(()=>{
         this.refresh();
         console.log('Booked');
       }).catch((err)=> {
