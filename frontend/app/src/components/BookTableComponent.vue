@@ -9,7 +9,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="form_container">
-            <form action="">
+            <form @submit.prevent="buttonClick">
               <div>
                 <input required v-model="userName" type="text" class="form-control" placeholder="Your Name" />
               </div>
@@ -24,16 +24,16 @@
                   <option value="" disabled selected>
                     How many persons?
                   </option>
-                  <option value="">
+                  <option value="2">
                     2
                   </option>
-                  <option value="">
+                  <option value="3">
                     3
                   </option>
-                  <option value="">
+                  <option value="4">
                     4
                   </option>
-                  <option value="">
+                  <option value="5">
                     5
                   </option>
                 </select>
@@ -42,7 +42,7 @@
                 <input required v-model="date" type="date" class="form-control">
               </div>
               <div class="btn_box">
-                <button @click="buttonClick">
+                <button type="submit">
                   Book Now
                 </button>
               </div>
@@ -83,7 +83,8 @@ export default {
       this.date = '';
     },
     buttonClick() {
-      axios.post('http://127.0.0.1:8000/table/', {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date}, ).then(()=>{
+      let data = {userName: this.userName, userNumber: this.userNumber, email: this.email, peopleNumber: this.peopleNumber, date: this.date};
+      axios.post('http://127.0.0.1:8000/table/', data).then(()=>{
         this.refresh();
         console.log('Booked');
       }).catch((err)=> {
