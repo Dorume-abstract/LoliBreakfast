@@ -4,12 +4,16 @@
           <div class="modal-wrapper">
             <div class="modal-container">
 
-              <div style="display: flex; justify-content: center" class="modal-header">
+              <div class="modal-header modal-part">
                 <div>Cart</div>
               </div>
-
-              <div class="modal-body">
-
+              <div class="modal-body modal-part">
+                <div v-if="!cart.length">
+                  There are no items.
+                </div>
+                <div style="overflow-y:scroll" class="modal-body modal-part" v-else>
+                  <div v-for="item in cart" :key="item.id">{{item.name}}</div>
+                </div>
               </div>
               <div class="modal-footer">
                   <button class="modal-default-button" @click="$emit('close')">
@@ -23,12 +27,27 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: "CartComponent",
+  data() {
+    return {
+      cart: this.getCart()
+    }
+  },
+  methods: {
+    ...mapGetters(['getCart'])
+  }
 }
 </script>
 
 <style scoped>
+.modal-part {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 .modal-mask {
   position: fixed;
   z-index: 9998;

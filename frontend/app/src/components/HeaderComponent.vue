@@ -1,5 +1,4 @@
 <template>
-  <cart-component v-if="modalActive" @close="changeModal"/>
 <header class="header_section my-header">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -91,6 +90,7 @@
         </nav>
       </div>
     </header>
+    <cart-component v-if="modalActive" @close="changeModal"/>
 </template>
 
 <script>
@@ -100,7 +100,8 @@ export default {
   components: {CartComponent},
   data() {
     return {
-      modalActive: false
+      modalActive: false,
+      that: undefined
     }
   },
   methods: {
@@ -108,6 +109,7 @@ export default {
       this.modalActive = !this.modalActive;
     },
     removeActive() {
+      console.log(this.$el)
       Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li')).forEach(item=>{
         item.classList.remove('active')
       })
@@ -121,6 +123,9 @@ export default {
       Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li'))[0].classList.add('active');
 
     }
+  },
+  mounted() {
+    this.that = this
   }
 }
 </script>
@@ -130,17 +135,5 @@ export default {
   background-color: black;
   width: 100%;
   z-index: 5;
-}
-
-.my-input {
-  border-radius: 25px;
-}
-
-.my-input:focus {
-  outline: none !important;
-}
-
-.dropdown-content {
-
 }
 </style>
