@@ -29,7 +29,7 @@
 <script>
 import FoodTypeComponent from "@/components/FoodTypeComponent";
 import FoodItemComponent from "@/components/FoodItemComponent";
-import {mapGetters} from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 export default {
   name: "MenuView",
   components: {FoodTypeComponent, FoodItemComponent},
@@ -42,6 +42,7 @@ export default {
   },
   methods: {
     ...mapGetters(['getFoodItems', 'getFoodTypes']),
+    ...mapActions(['getFoodItemsFromApi', 'getFoodTypesFromApi']),
   },
   mounted() {
     Promise.all([
