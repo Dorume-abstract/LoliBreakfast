@@ -4,7 +4,8 @@ import axios from 'axios'
 export default createStore({
   state: {
     foodItems: [],
-    foodTypes: []
+    foodTypes: [],
+    cart: []
   },
   getters: {
     getFoodItems(state) {
@@ -12,6 +13,9 @@ export default createStore({
     },
     getFoodTypes(state) {
       return state.foodTypes;
+    },
+    getCart(state) {
+      return state.cart;
     }
   },
   mutations: {
@@ -20,6 +24,9 @@ export default createStore({
     },
     setFoodTypes(state, newTypes) {
       state.foodTypes = newTypes;
+    },
+    setCartItem(state, item) {
+      state.cart.push(item);
     }
   },
   actions: {

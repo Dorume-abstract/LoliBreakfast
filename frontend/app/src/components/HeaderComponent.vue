@@ -1,4 +1,5 @@
 <template>
+  <cart-component v-if="modalActive" @close="changeModal"/>
 <header class="header_section my-header">
       <div class="container">
         <nav class="navbar navbar-expand-lg custom_nav-container ">
@@ -28,7 +29,7 @@
               </li>
             </ul>
             <div class="user_option">
-              <a class="cart_link" href="#">
+              <a @click="changeModal" class="cart_link">
                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                   <g>
                     <g>
@@ -82,10 +83,6 @@
                   </g>
                 </svg>
               </a>
-                <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
-                    <i class="fa fa-search" aria-hidden="true"></i>
-                </button>
-              <input class="fa my-input" type="text" placeholder="Search.." onkeyup="">
               <a href="" class="order_online">
                 Order Online
               </a>
@@ -97,14 +94,19 @@
 </template>
 
 <script>
+import CartComponent from "@/components/CartComponent";
 export default {
   name: "HeaderComponent",
+  components: {CartComponent},
   data() {
     return {
-      searchActive: false
+      modalActive: false
     }
   },
   methods: {
+    changeModal() {
+      this.modalActive = !this.modalActive;
+    },
     removeActive() {
       Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li')).forEach(item=>{
         item.classList.remove('active')

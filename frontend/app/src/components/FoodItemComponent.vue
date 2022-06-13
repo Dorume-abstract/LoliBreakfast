@@ -22,7 +22,7 @@
                         <span class="discount">${{item.price - item.price * item.discount / 100}}</span>
                       </div>
                     </h6>
-                    <a href="">
+                    <a @click="addToCart">
                       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                         <g>
                           <g>
@@ -84,11 +84,32 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+import {mapMutations} from "vuex"
+import {useToast} from "vue-toastification";
+
 export default {
   name: "FoodItemComponent",
   props: [
       'item'
-  ]
+  ],
+  methods: {
+    ...mapGetters(['getCart']),
+    ...mapMutations(['setCartItem']),
+    addToCart() {
+      const toast = useToast();
+      if (!this.getCart().some(el=> el.id === this.item.id)) {
+        this.setCartItem(this.item);
+        toast.success(`${this.item.name} was added to cart!`, {
+          timeout: 2000
+        })
+        return;
+      }
+      toast.info(`${this.item.name} already in cart!`, {
+        timeout: 2000
+      })
+    }
+  }
 }
 </script>
 
