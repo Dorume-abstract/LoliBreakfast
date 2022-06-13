@@ -44,8 +44,13 @@ export default {
     ...mapGetters(['getFoodItems', 'getFoodTypes']),
   },
   mounted() {
-    this.foodItems = this.getFoodItems;
-    this.foodTypes = this.getFoodTypes;
+    Promise.all([
+        this.getFoodItemsFromApi(),
+        this.getFoodTypesFromApi()
+    ]).then((data)=>{
+      this.foodItems = data[0];
+      this.foodTypes = data[1];
+    })
   }
 }
 </script>
