@@ -1,7 +1,7 @@
 <template>
 <ul class="filters_menu">
         <li @click="onClickButton" class="active" data-filter="*" id="-1">All</li>
-        <li @click="onClickButton" v-for="item in types" :key="item.type_id" :id="item.type_id">{{item.name}}</li>
+        <li @click="onClickButton" v-for="item in types" :key="item.id" :id="item.id">{{item.name}}</li>
       </ul>
 </template>
 

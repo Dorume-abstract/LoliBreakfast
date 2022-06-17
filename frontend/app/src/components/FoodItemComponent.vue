@@ -4,6 +4,7 @@
               <div>
                 <div class="img-box">
                   <img v-bind:src="item.imgUrl" alt="">
+                  
                 </div>
                 <div class="detail-box">
                   <h5>
