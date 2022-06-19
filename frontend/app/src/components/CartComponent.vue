@@ -12,14 +12,16 @@
 
       <ul class="shopping-cart-items">
         <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice" @remove="removeItem"/>
-        <div v-if="user_info">
-        <input placeholder="Enter name" class="inp" v-model="name" type="text">
-        <input placeholder="Enter phone" class="inp" v-model="phone" type="text">
-        <input placeholder="Enter address" class="inp" v-model="address" type="text">
-        </div>
+        <form action="">
+          <div v-if="user_info">
+            <input placeholder="Enter name" required class="inp" v-model="name" type="text">
+            <input placeholder="Enter phone" required class="inp" v-model="phone" @input="acceptNumber" type="text">
+            <input placeholder="Enter address" required class="inp" v-model="address" type="text">
+          </div>
+        </form>
       </ul>
-      <a v-if="!user_info" @click="changeUserInfo" style="color: whitesmoke" class="button">Enter Credentials</a>
-      <a v-if="user_info" style="color: whitesmoke" class="button">Make Order</a>
+      <a v-if="!user_info" @click="changeUserInfo" style="color: whitesmoke; cursor: pointer" class="button">Enter Credentials</a>
+      <a v-if="user_info" @click="makeOrder" style="color: whitesmoke; cursor: pointer" class="button">Make Order</a>
   </div> <!--end shopping-cart -->
 </div> <!--end container -->
       </transition>
@@ -29,6 +31,7 @@
 import {mapGetters, mapMutations} from "vuex";
 import CartItemComponent from "@/components/CartItemComponent";
 import {useToast} from "vue-toastification";
+import axios from "axios";
 
 export default {
   name: "CartComponent",
@@ -47,7 +50,45 @@ export default {
   methods: {
     ...mapGetters(['getCart']),
     ...mapMutations(['removeCartItem']),
+    makeOrder() {
+      const toast = useToast();
+      if (!this.cart.length) {
+        toast.warning("Fill cart firstly", {
+          position: "top-center",
+          timeout: 2000
+        })
+        return;
+      }
+      let order = {name: this.name, phone: this.phone, address: this.address, orderItems:[]};
+      this.cart.forEach(item=>{
+        order.orderItems.push({foodId: item.id, quantity: item.quantity})
+      })
+      axios.post('http://127.0.0.1:8000/api/order', order).then(()=>{
+        toast.success("Order successfully made", {
+          position: "top-center",
+          timeout: 2000
+        })
+      }).catch(err=>{
+        console.log(err)
+        toast.error("Something went wrong", {
+          position: "top-center",
+          timeout: 2000
+        })
+      })
+    },
+    acceptNumber() {
+        let x = this.phone.replace(/\D/g, '').match(/(\d{0,3})(\d{0,3})(\d{0,4})/);
+        this.phone = !x[2] ? x[1] : '(' + x[1] + ') ' + x[2] + (x[3] ? '-' + x[3] : '');
+    },
     changeUserInfo() {
+      const toast = useToast();
+      if (!this.cart.length) {
+        toast.warning("Fill cart firstly", {
+          position: "top-center",
+          timeout: 2000
+        })
+        return;
+      }
       this.user_info = !this.user_info;
     },
     removeItem(id) {
