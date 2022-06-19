@@ -13,8 +13,13 @@
       <ul class="shopping-cart-items">
         <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice" @remove="removeItem"/>
       </ul>
-
-      <a href="#" class="button">Checkout</a>
+      <div v-if="user_info">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+      </div>
+      <a v-if="!user_info" @click="changeUserInfo" style="color: whitesmoke" class="button">Enter Credentials</a>
+      <a v-if="user_info" style="color: whitesmoke" class="button">Make Order</a>
   </div> <!--end shopping-cart -->
 </div> <!--end container -->
       </transition>
@@ -32,12 +37,16 @@ export default {
   data() {
     return {
       cart: this.getCart(),
-      genPrice: null
+      genPrice: null,
+      user_info: false
     }
   },
   methods: {
     ...mapGetters(['getCart']),
     ...mapMutations(['removeCartItem']),
+    changeUserInfo() {
+      this.user_info = !this.user_info;
+    },
     removeItem(id) {
       this.removeCartItem(id);
       setTimeout(this.calculatePrice, 0);
