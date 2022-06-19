@@ -48,6 +48,7 @@ export default {
   mounted() {
     this.cart = this.getCart();
     if (this.cart.length) this.calculatePrice();
+
   }
 }
 </script>
