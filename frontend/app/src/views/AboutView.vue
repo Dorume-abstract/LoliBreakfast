@@ -14,14 +14,12 @@
           <div class="detail-box">
             <div class="heading_container">
               <h2>
-                We Are Feane
+                We are the Ally restaurant
               </h2>
             </div>
             <p>
-              There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration
-              in some form, by injected humour, or randomised words which don't look even slightly believable. If you
-              are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in
-              the middle of text. All
+              Hello! We are Ally restaurant because we are your best ally on the battlefield called Kitchen! 
+              We have the best dishes and prices in this field and you, my faithful friend, should choose the best side!
             </p>
           </div>
         </div>

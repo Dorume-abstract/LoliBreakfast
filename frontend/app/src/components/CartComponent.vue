@@ -47,7 +47,7 @@ export default {
   },
   mounted() {
     this.cart = this.getCart();
-    this.calculatePrice()
+    if (this.cart.length) this.calculatePrice();
   }
 }
 </script>
