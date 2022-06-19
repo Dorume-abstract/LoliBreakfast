@@ -19,7 +19,7 @@ export default {
   data() {
     return {
       cartItem: Object.assign({}, this.item),
-      quantity: this.item.quantity,
+      quantity: 1,
       basePrice: this.item.price,
     }
   },
