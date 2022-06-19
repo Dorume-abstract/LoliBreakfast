@@ -31,8 +31,11 @@
 </template>
 
 <script>
+import HeaderComponentVue from '@/components/HeaderComponent.vue'
+
 export default {
-  name: "AboutView"
+  name: "AboutView",
+  components: HeaderComponentVue
 }
 </script>
 
