@@ -98,6 +98,7 @@ export default {
     ...mapGetters(['getCart']),
     ...mapMutations(['setCartItem']),
     addToCart() {
+        console.log(this.item);
       const toast = useToast();
       if (!this.getCart().some(el=> el.id === this.item.id)) {
         this.setCartItem(this.item);

@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('name');
             $table->string('imgUrl');
             $table->string('desc');
-            $table->decimal('price', $precision = 8, $scale = 2);
+            $table->double('price', $precision = 8, $scale = 2);
             $table->boolean('isAvailable');
-            $table->string('discount');
+            $table->integer('discount');
             $table->foreignId('type_id');
             $table->timestamps();
         });
