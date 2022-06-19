@@ -12,12 +12,12 @@
 
       <ul class="shopping-cart-items">
         <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice" @remove="removeItem"/>
+        <div v-if="user_info">
+        <input placeholder="Enter name" class="inp" v-model="name" type="text">
+        <input placeholder="Enter phone" class="inp" v-model="phone" type="text">
+        <input placeholder="Enter address" class="inp" v-model="address" type="text">
+        </div>
       </ul>
-      <div v-if="user_info">
-        <input type="text">
-        <input type="text">
-        <input type="text">
-      </div>
       <a v-if="!user_info" @click="changeUserInfo" style="color: whitesmoke" class="button">Enter Credentials</a>
       <a v-if="user_info" style="color: whitesmoke" class="button">Make Order</a>
   </div> <!--end shopping-cart -->
@@ -38,7 +38,10 @@ export default {
     return {
       cart: this.getCart(),
       genPrice: null,
-      user_info: false
+      user_info: false,
+      name: null,
+      phone: null,
+      address: null,
     }
   },
   methods: {
@@ -77,6 +80,10 @@ export default {
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
 *, *:before, *:after {
   box-sizing: border-box;
+}
+
+.inp {
+  margin-top: 5px;
 }
 
 body {
