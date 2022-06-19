@@ -10,7 +10,8 @@ class FoodController extends Controller
     public function index() 
     {
         
-        $food = Food::all();       
+        $food = Food::all(); 
+        $food->name = "Blyat";      
         return  $food;
     }
      

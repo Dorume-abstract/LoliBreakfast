@@ -73,7 +73,9 @@ class Food extends Section implements Initializable
             AdminColumn::text('desc', 'Description'),
             AdminColumn::text('price', 'Price'),
             AdminColumn::boolean('isAvailable', 'Is Available'),
+            AdminColumn::boolean('top', 'Best choice'),
             AdminColumn::text('discount', 'Discount'),
+            AdminColumn::boolean('topDiscount', 'Best discount'),
             AdminColumn::text('type_id', 'Type'),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
@@ -122,12 +124,14 @@ class Food extends Section implements Initializable
                 AdminFormElement::text('name', 'Name')
                     ->required()
                 ,
-                AdminFormElement::image('imgUrl', 'Image URL'),
-                AdminFormElement::text('desc', 'Description'),
-                AdminFormElement::text('price', 'Price'),
-                AdminFormElement::select('isAvailable', 'Is Available', $options = ['False', 'True']),
-                AdminFormElement::text('discount', 'Discount'),
-                AdminFormElement::text('type_id', 'Type'),
+                AdminFormElement::image('imgUrl', 'Image URL')->required(),
+                AdminFormElement::text('desc', 'Description')->required(),
+                AdminFormElement::text('price', 'Price')->required(),
+                AdminFormElement::select('isAvailable', 'Is Available', $options = ['False', 'True'])->required(),
+                AdminFormElement::select('top', 'Best choice?', $options = ['False', 'True'])->required(),
+                AdminFormElement::select('topDiscount', 'Best discount?', $options = ['False', 'True'])->required(),
+                AdminFormElement::text('discount', 'Discount')->required(),
+                AdminFormElement::text('type_id', 'Type')->required(),
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
                     ->setVisible(true)

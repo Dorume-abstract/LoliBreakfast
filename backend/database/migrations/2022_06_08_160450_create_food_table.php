@@ -22,6 +22,8 @@ return new class extends Migration
             $table->boolean('isAvailable');
             $table->integer('discount');
             $table->foreignId('type_id');
+            $table->boolean('top');
+            $table->boolean('topDiscount');
             $table->timestamps();
         });
     }

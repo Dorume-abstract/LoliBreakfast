@@ -11,7 +11,7 @@
                                 <h6>
                                     <span>{{item.discount}}%</span> Off
                                 </h6>
-                                <a href="" @click="addToCart">
+                                <a @click="addToCart">
                                     Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                         viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;"

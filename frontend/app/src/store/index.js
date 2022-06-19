@@ -5,12 +5,7 @@ export default createStore({
   state: {
     foodItems: [],
     foodTypes: [],
-    cart: [{id: 1, discount: 10, name: "Amogus", desc: "cool", price: 300, quantity: 1, imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZ0LLWgGwyC080XZWu72Z9krLgqCjJVAusQ&usqp=CAU'},
-      {id: 2,discount: 10, name: "Sus", desc: "nibber", price: 200.15, quantity: 1, imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZ0LLWgGwyC080XZWu72Z9krLgqCjJVAusQ&usqp=CAU'},
-      {id: 2,discount: 10, name: "Sus", desc: "nibber", price: 200.15, quantity: 1, imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZ0LLWgGwyC080XZWu72Z9krLgqCjJVAusQ&usqp=CAU'},
-      {id: 2,discount: 10, name: "Sus", desc: "nibber", price: 200.15, quantity: 1, imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZ0LLWgGwyC080XZWu72Z9krLgqCjJVAusQ&usqp=CAU'},
-      {id: 2,discount: 10, name: "Sus", desc: "nibber", price: 200.15, quantity: 1, imgUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBZ0LLWgGwyC080XZWu72Z9krLgqCjJVAusQ&usqp=CAU'},
-    ]
+    cart: []
   },
   getters: {
     getFoodItems(state) {
