@@ -24,8 +24,11 @@ export default {
     return {
       cartItem: Object.assign({}, this.item),
       quantity: 1,
-      basePrice: this.item.price
+      basePrice: this.item.discount ? this.item.price - this.item.discount / 100 : this.item.price,
     }
+  },
+  mounted() {
+    this.cartItem.price = this.basePrice;
   },
   methods: {
     getRealPrice(){
