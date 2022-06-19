@@ -4,7 +4,7 @@
         <nav class="navbar navbar-expand-lg custom_nav-container ">
           <router-link class="navbar-brand" to="/">
             <span @click="activeFirst">
-              Feane
+              Ally
             </span>
           </router-link>
 
@@ -106,8 +106,7 @@ export default {
       this.modalActive = !this.modalActive;
     },
     removeActive() {
-      console.log(this.$el)
-      Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li')).forEach(item=>{
+      Array.from(document.querySelector('.navbar-nav').getElementsByTagName('li')).forEach(item=>{
         item.classList.remove('active')
       })
     },
@@ -117,7 +116,7 @@ export default {
     },
     activeFirst() {
       this.removeActive();
-      Array.from(this.$el.querySelector('.navbar-nav').getElementsByTagName('li'))[0].classList.add('active');
+      Array.from(document.querySelector('.navbar-nav').getElementsByTagName('li'))[0].classList.add('active');
 
     }
   },
