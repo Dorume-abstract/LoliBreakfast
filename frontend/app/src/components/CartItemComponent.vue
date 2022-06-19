@@ -24,7 +24,7 @@ export default {
     return {
       cartItem: Object.assign({}, this.item),
       quantity: 1,
-      basePrice: this.item.discount ? this.item.price - this.item.discount / 100 : this.item.price,
+      basePrice: this.item.discount ? this.item.price - this.item.price * this.item.discount / 100 : this.item.price,
     }
   },
   mounted() {

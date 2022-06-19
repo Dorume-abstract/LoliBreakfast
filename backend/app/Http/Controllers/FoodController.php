@@ -7,33 +7,47 @@ use App\Models\Food;
 
 class FoodController extends Controller
 {
-    public function index() 
+    public function console_log($data)
     {
-        
-        $food = Food::all(); 
-        $food->name = "Blyat";      
-        return  $food;
+        echo '<script>';
+        echo 'console.log(' . json_encode($data) . ')';
+        echo '</script>';
     }
-     
-    public function show($id) 
+
+    public function index()
+    {
+
+        $foods = Food::all();
+        foreach($foods as $food){
+            if(!str_starts_with($food->imgUrl, "http")){
+                $food->imgUrl = 'http://' . $_SERVER['SERVER_NAME'] . ':8000/' . $food->imgUrl;
+            }
+        }
+        return  $foods;
+    }
+
+    public function show($id)
     {
         return Food::find($id);
     }
-    
-   public function store(Request $request) {
+
+    public function store(Request $request)
+    {
         return Food::create($request->all);
     }
-    
-    public function update(Request $request, $id) {
+
+    public function update(Request $request, $id)
+    {
         $food = Food::findOrFail($id);
         $food->update($request->all());
-    
+
         return $food;
     }
-    
-    public function delete($id) {
+
+    public function delete($id)
+    {
         Food::find($id)->delete();
-    
+
         return 204;
     }
 }
