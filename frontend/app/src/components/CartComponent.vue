@@ -1,106 +1,181 @@
 <template>
  <transition name="modal">
-        <div class="modal-mask">
-          <div class="modal-wrapper">
-            <div class="modal-container">
-
-              <div class="modal-header modal-part">
-                <div>Cart</div>
-              </div>
-              <div class="modal-body modal-part">
-                <div v-if="!cart.length">
-                  There are no items.
-                </div>
-                <div style="overflow-y:scroll" class="modal-body modal-part" v-else>
-                  <div v-for="item in cart" :key="item.id">{{item.name}}</div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                  <button class="modal-default-button" @click="$emit('close')">
-                    OK
-                  </button>
-              </div>
-            </div>
-          </div>
+   <div class="container" style="position: absolute; z-index: 1000; left: 20.1%">
+    <div class="shopping-cart">
+      <div class="shopping-cart-header">
+        <i class="fa fa-shopping-cart cart-icon"></i><span class="badge">{{cart.length}}</span>
+        <div class="shopping-cart-total">
+          <span class="lighter-text">Total:</span>
+          <span class="main-color-text">${{genPrice}}</span>
         </div>
+      </div> <!--end shopping-cart-header -->
+
+      <ul class="shopping-cart-items">
+        <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice"/>
+      </ul>
+
+      <a href="#" class="button">Checkout</a>
+  </div> <!--end shopping-cart -->
+</div> <!--end container -->
       </transition>
 </template>
 
 <script>
 import {mapGetters} from "vuex";
+import CartItemComponent from "@/components/CartItemComponent";
 
 export default {
   name: "CartComponent",
+  components: {CartItemComponent},
+
   data() {
     return {
-      cart: this.getCart()
+      cart: this.getCart(),
+      genPrice: null
     }
   },
   methods: {
-    ...mapGetters(['getCart'])
+    ...mapGetters(['getCart']),
+    calculatePrice() {
+      let items = this.$refs["cart-item"];
+      let price = 0;
+      items.forEach(item=>{
+        price += item.cartItem.price;
+      })
+      this.genPrice = price;
+    }
+  },
+  mounted() {
+    this.cart = this.getCart();
+    this.calculatePrice()
   }
 }
 </script>
 
 <style scoped>
-.modal-part {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+@import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css);
+*, *:before, *:after {
+  box-sizing: border-box;
 }
 
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+body {
+  font: 14px/22px "Lato", Arial, sans-serif;
+  background: #6394F8;
 }
 
-.modal-container {
-  width: 300px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
+.lighter-text {
+  color: #ABB0BE;
 }
 
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
+.main-color-text {
+  color: #6394F8;
 }
 
-.modal-body {
-  margin: 20px 0;
+nav {
+  padding: 20px 0 40px 0;
+  background: #F8F8F8;
+  font-size: 16px;
 }
-
-.modal-default-button {
+nav .navbar-left {
+  float: left;
+}
+nav .navbar-right {
   float: right;
 }
-
-.modal-enter {
-  opacity: 0;
+nav ul li {
+  display: inline;
+  padding-left: 20px;
+}
+nav ul li a {
+  color: #777777;
+  text-decoration: none;
+}
+nav ul li a:hover {
+  color: black;
 }
 
-.modal-leave-active {
-  opacity: 0;
+.container {
+  margin: auto;
+  width: 80%;
 }
 
-.modal-enter .modal-container,
-.modal-leave-active .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
+.badge {
+  background-color: #6394F8;
+  border-radius: 10px;
+  color: white;
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1;
+  padding: 3px 7px;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
 }
+
+.shopping-cart {
+  margin: 20px 0;
+  float: right;
+  background: white;
+  width: 390px;
+  position: relative;
+  border-radius: 3px;
+  padding: 20px;
+}
+.shopping-cart .shopping-cart-header {
+  border-bottom: 1px solid #E8E8E8;
+  padding-bottom: 15px;
+}
+.shopping-cart .shopping-cart-header .shopping-cart-total {
+  float: right;
+}
+.shopping-cart .shopping-cart-items {
+  padding-top: 20px;
+}
+.shopping-cart .shopping-cart-items li {
+  margin-bottom: 18px;
+}
+.shopping-cart .shopping-cart-items img {
+  float: left;
+  margin-right: 12px;
+}
+
+
+.shopping-cart:after {
+  bottom: 100%;
+  left: 89%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-bottom-color: white;
+  border-width: 8px;
+  margin-left: -8px;
+}
+
+.cart-icon {
+  color: #515783;
+  font-size: 24px;
+  margin-right: 7px;
+  float: left;
+}
+
+.button {
+  background: #6394F8;
+  color: white;
+  text-align: center;
+  padding: 12px;
+  text-decoration: none;
+  display: block;
+  border-radius: 3px;
+  font-size: 16px;
+  margin: 25px 0 15px 0;
+}
+.button:hover {
+  background: #729ef9;
+}
+
 
 </style>
