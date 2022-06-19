@@ -11,7 +11,7 @@
       </div> <!--end shopping-cart-header -->
 
       <ul class="shopping-cart-items">
-        <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice"/>
+        <cart-item-component v-for="item in cart" :key="item.id" :item="item" ref="cart-item" @recprice="calculatePrice" @remove="removeItem"/>
       </ul>
 
       <a href="#" class="button">Checkout</a>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import {mapGetters} from "vuex";
+import {mapGetters, mapMutations} from "vuex";
 import CartItemComponent from "@/components/CartItemComponent";
 
 export default {
@@ -36,13 +36,18 @@ export default {
   },
   methods: {
     ...mapGetters(['getCart']),
+    ...mapMutations(['removeCartItem']),
+    removeItem(id) {
+      this.removeCartItem(id);
+      setTimeout(this.calculatePrice, 0);
+    },
     calculatePrice() {
       let items = this.$refs["cart-item"];
       let price = 0;
       items.forEach(item=>{
         price += item.cartItem.price;
       })
-      this.genPrice = price;
+      this.genPrice = parseFloat(price.toFixed(2));
     }
   },
   mounted() {
@@ -117,7 +122,7 @@ nav ul li a:hover {
 .shopping-cart {
   margin: 20px 0;
   float: right;
-  background: white;
+  background: #3e3e3e;
   width: 390px;
   position: relative;
   border-radius: 3px;
@@ -132,6 +137,7 @@ nav ul li a:hover {
 }
 .shopping-cart .shopping-cart-items {
   padding-top: 20px;
+  list-style-type: none;
 }
 .shopping-cart .shopping-cart-items li {
   margin-bottom: 18px;

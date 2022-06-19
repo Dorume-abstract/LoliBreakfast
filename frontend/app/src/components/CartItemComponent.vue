@@ -1,12 +1,16 @@
 <template>
   <li class="clearfix non-select">
+    <div style="color: red; cursor: pointer" class="close" @click="$emit('remove', this.cartItem.id)">
+    ✕
+    </div>
     <img :src="item.imgUrl" width="70" height="70" alt="item1" />
     <span class="item-name">{{cartItem.name}}</span>
-    <div class="item-price">${{getRealPrice}}</div>
+    <div class="item-price">${{cartItem.price}}</div>
     <span class="item-quantity">Quantity: {{quantity}}</span>
-    <span class="curs" @click="decreaseQuantity" >&lt;</span>
-    <span class="curs" @click="increaseQuantity" style="margin-left: 5px">&gt;</span>
-
+    <div style="margin-left: 3px">
+      <span class="curs" @click="decreaseQuantity"><big>-</big></span>
+      <span class="curs" @click="increaseQuantity" style="margin-left: 5px"><big>+</big></span>
+    </div>
   </li>
 </template>
 
@@ -20,7 +24,7 @@ export default {
     return {
       cartItem: Object.assign({}, this.item),
       quantity: 1,
-      basePrice: this.rounded(this.item.price - this.price * this.discount),
+      basePrice: this.item.price
     }
   },
   methods: {
@@ -28,13 +32,15 @@ export default {
         return this.rounded(this.cartItem.item.price - this.cartItem.price * this.cartItem.discount)
     },
     rounded (number){
-    return +number.toFixed(2);
+      return parseFloat(number.toFixed(2));
     },
     increasePrice() {
-      this.cartItem.price += this.rounded(this.basePrice - this.basePrice * this.discount);
+      this.cartItem.price += this.basePrice;
+      this.cartItem.price = this.rounded(this.cartItem.price)
     },
     decreasePrice() {
-      this.cartItem.price -= this.rounded(this.basePrice - this.basePrice * this.discount);
+      this.cartItem.price -= this.basePrice;
+      this.cartItem.price = this.rounded(this.cartItem.price)
     },
     increaseQuantity() {
       this.quantity ++;
@@ -65,6 +71,7 @@ export default {
 
 .curs {
   cursor: pointer;
+  color: white;
 }
 
 .non-select {
@@ -72,6 +79,7 @@ export default {
 }
 
 .item-name {
+  color: white;
   display: block;
   padding-top: 10px;
   font-size: 16px;
