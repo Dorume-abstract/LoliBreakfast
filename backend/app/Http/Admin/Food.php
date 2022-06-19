@@ -18,13 +18,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Types
+ * Class Food
  *
- * @property \App\Models\Type $model
+ * @property \App\Models\Food $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Types extends Section implements Initializable
+class Food extends Section implements Initializable
 {
     /**
      * @var bool
@@ -46,7 +46,7 @@ class Types extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-object-group');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-utensils');
     }
 
     /**
@@ -69,6 +69,12 @@ class Types extends Section implements Initializable
                     $query->orderBy('created_at', $direction);
                 })
             ,
+            AdminColumn::image('imgUrl', 'Image URL'),
+            AdminColumn::text('desc', 'Description'),
+            AdminColumn::text('price', 'Price'),
+            AdminColumn::boolean('isAvailable', 'Is Available'),
+            AdminColumn::text('discount', 'Discount'),
+            AdminColumn::text('type_id', 'Type'),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
                 ->setOrderable(function($query, $direction) {
@@ -89,7 +95,7 @@ class Types extends Section implements Initializable
 
         $display->setColumnFilters([
             AdminColumnFilter::select()
-                ->setModelForOptions(\App\Models\Type::class, 'name')
+                ->setModelForOptions(\App\Models\Food::class, 'name')
                 ->setLoadOptionsQueryPreparer(function($element, $query) {
                     return $query;
                 })
@@ -116,6 +122,12 @@ class Types extends Section implements Initializable
                 AdminFormElement::text('name', 'Name')
                     ->required()
                 ,
+                AdminFormElement::image('imgUrl', 'Image URL'),
+                AdminFormElement::text('desc', 'Description'),
+                AdminFormElement::text('price', 'Price'),
+                AdminFormElement::select('isAvailable', 'Is Available', $options = ['False', 'True']),
+                AdminFormElement::text('discount', 'Discount'),
+                AdminFormElement::text('type_id', 'Type'),
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
                     ->setVisible(true)

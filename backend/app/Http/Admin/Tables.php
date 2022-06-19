@@ -18,13 +18,13 @@ use SleepingOwl\Admin\Form\Buttons\SaveAndCreate;
 use SleepingOwl\Admin\Section;
 
 /**
- * Class Types
+ * Class Tables
  *
- * @property \App\Models\Type $model
+ * @property \App\Models\tables $model
  *
  * @see https://sleepingowladmin.ru/#/ru/model_configuration_section
  */
-class Types extends Section implements Initializable
+class Tables extends Section implements Initializable
 {
     /**
      * @var bool
@@ -46,7 +46,7 @@ class Types extends Section implements Initializable
      */
     public function initialize()
     {
-        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-object-group');
+        $this->addToNavigation()->setPriority(100)->setIcon('fas fa-calendar');
     }
 
     /**
@@ -58,10 +58,10 @@ class Types extends Section implements Initializable
     {
         $columns = [
             AdminColumn::text('id', '#')->setWidth('50px')->setHtmlAttribute('class', 'text-center'),
-            AdminColumn::link('name', 'Name', 'created_at')
+            AdminColumn::link('userName', 'Name', 'created_at')
                 ->setSearchCallback(function($column, $query, $search){
                     return $query
-                        ->orWhere('name', 'like', '%'.$search.'%')
+                        ->orWhere('userName', 'like', '%'.$search.'%')
                         ->orWhere('created_at', 'like', '%'.$search.'%')
                     ;
                 })
@@ -69,6 +69,10 @@ class Types extends Section implements Initializable
                     $query->orderBy('created_at', $direction);
                 })
             ,
+            AdminColumn::text('userNumber', 'Number'),
+            AdminColumn::email('email', 'Email'),
+            AdminColumn::text('peopleNumber', 'Number of People'),
+            AdminColumn::text('date', 'Date'),
             AdminColumn::text('created_at', 'Created / updated', 'updated_at')
                 ->setWidth('160px')
                 ->setOrderable(function($query, $direction) {
@@ -89,12 +93,12 @@ class Types extends Section implements Initializable
 
         $display->setColumnFilters([
             AdminColumnFilter::select()
-                ->setModelForOptions(\App\Models\Type::class, 'name')
+                ->setModelForOptions(\App\Models\tables::class, 'userName')
                 ->setLoadOptionsQueryPreparer(function($element, $query) {
                     return $query;
                 })
-                ->setDisplay('name')
-                ->setColumnName('name')
+                ->setDisplay('userName')
+                ->setColumnName('userName')
                 ->setPlaceholder('All names')
             ,
         ]);
@@ -113,9 +117,11 @@ class Types extends Section implements Initializable
     {
         $form = AdminForm::card()->addBody([
             AdminFormElement::columns()->addColumn([
-                AdminFormElement::text('name', 'Name')
-                    ->required()
-                ,
+                AdminFormElement::text('userName', 'Name')->required(),
+                AdminFormElement::text('userNumber', 'Number')->required(),
+                AdminFormElement::text('email', 'Email'),
+                AdminFormElement::select('peopleNumber', 'Number of People', $options = [2,3,4,5])->required(),
+                AdminFormElement::date('date', 'Date')->required(),
                 AdminFormElement::html('<hr>'),
                 AdminFormElement::datetime('created_at')
                     ->setVisible(true)

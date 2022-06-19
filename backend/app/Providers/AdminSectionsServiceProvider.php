@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use SleepingOwl\Admin\Providers\AdminSectionsServiceProvider as ServiceProvider;
 use App\Models\Type;
+use App\Models\Food;
+use App\Models\tables;
+
 
 class AdminSectionsServiceProvider extends ServiceProvider
 {
@@ -14,6 +17,8 @@ class AdminSectionsServiceProvider extends ServiceProvider
     protected $sections = [
         //\App\User::class => 'App\Http\Sections\Users',
         Type::class => 'App\Http\Admin\Types',
+        Food::class => 'App\Http\Admin\Food',
+        tables::class => 'App\Http\Admin\Tables'
     ];
 
     /**
