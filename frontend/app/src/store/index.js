@@ -31,6 +31,9 @@ export default createStore({
     removeCartItem(state, id) {
       const index = state.cart.findIndex(obj=>obj.id === id)
       state.cart.splice(index, 1)
+    },
+    clearCartItems(state){
+        state.cart = [];
     }
   },
   actions: {

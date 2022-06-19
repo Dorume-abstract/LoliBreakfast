@@ -7,13 +7,6 @@ use App\Models\Food;
 
 class FoodController extends Controller
 {
-    public function console_log($data)
-    {
-        echo '<script>';
-        echo 'console.log(' . json_encode($data) . ')';
-        echo '</script>';
-    }
-
     public function index()
     {
 
