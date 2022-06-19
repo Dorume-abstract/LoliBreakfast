@@ -23,6 +23,7 @@
 <script>
 import {mapGetters, mapMutations} from "vuex";
 import CartItemComponent from "@/components/CartItemComponent";
+import {useToast} from "vue-toastification";
 
 export default {
   name: "CartComponent",
@@ -40,6 +41,10 @@ export default {
     removeItem(id) {
       this.removeCartItem(id);
       setTimeout(this.calculatePrice, 0);
+      const toast = useToast();
+      toast.success('Item successfully removed from card!', {
+          timeout: 2000
+        })
     },
     calculatePrice() {
       let items = this.$refs["cart-item"];
