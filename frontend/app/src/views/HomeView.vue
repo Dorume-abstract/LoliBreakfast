@@ -13,16 +13,13 @@
                                 <div class="col-md-7 col-lg-6 ">
                                     <div class="detail-box">
                                         <h1>
-                                            California Pizza
+                                            High-Quality Food
                                         </h1>
                                         <p>
-                                            pineapple, seafood, asparagus, shrimps, flour
+                                            Quality is the basis of everything. 
+                                            We combine the freshest ingredients with the most experienced chefs 
+                                            and get a quality you have never seen before.
                                         </p>
-                                        <div class="btn-box">
-                                            <a href="" class="btn1">
-                                                Order Now
-                                            </a>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -34,10 +31,11 @@
                                 <div class="col-md-7 col-lg-6 ">
                                     <div class="detail-box">
                                         <h1>
-                                            Greek-Style Pizza
+                                            Fast
                                         </h1>
                                         <p>
-                                            flour, tomato sauce, feta, artishoke, oregano, elia kalamatas
+                                            Nothing is more annoying than waiting! 
+                                            We, as your faithful ally, will save you from this horror!
                                         </p>
                                         <div class="btn-box">
                                             <a href="" class="btn1">
@@ -178,15 +176,11 @@
                     <div class="box">
                         <div class="detail-box">
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                The best restaurant ever!!
                             </p>
                             <h6>
                                 Moana Michell
                             </h6>
-                            <p>
-                                magna aliqua
-                            </p>
                         </div>
                         <div class="img-box">
                             <img src="images/client1.jpg" alt="" class="box-img">

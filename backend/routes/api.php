@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\TablesController;
+use App\Http\Controllers\TypeController;
 
 
 /*
@@ -27,6 +28,14 @@ Route::delete('food/{id}', [FoodController::class, 'delete']);
 
 #region tables
 Route::post("table", [TablesController::class, 'store']);
+#endregion
+
+#region Type
+Route::get('type', [TypeController::class, 'index']);
+Route::get('type/{id}', [TypeController::class, 'show']);
+Route::post('type',[TypeController::class, 'store']);
+Route::put('type/{id}', [TypeController::class, 'update']);
+Route::delete('type/{id}', [TypeController::class, 'delete']);
 #endregion
 
 #region Order
